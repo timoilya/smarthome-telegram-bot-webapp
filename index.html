@@ -1,0 +1,37 @@
+
+<html>
+  <head>
+    <title>Hls.js demo - basic usage</title>
+  </head>
+
+  <body>
+    <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
+
+
+    <center>
+      <video id="player" height="90%" autoplay controls crossorigin></video>
+</video>
+    </center>
+
+        <script>
+        const video = document.getElementById('player');
+        const videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+
+        video.muted = true;
+
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+            video.addEventListener('loadedmetadata', function() {
+                video.play();
+            });
+        }
+    </script>
+</body>
+</html>
