@@ -35,6 +35,8 @@
 
 <center>
     <video id="player" autoplay controls crossorigin></video>
+    <button id="fullscreenBtn">Развернуть на весь экран</button>
+
 </center>
 
 
@@ -77,7 +79,7 @@
     video.muted = true;
 
     if (Hls.isSupported()) {
-        const hls = new Hls();
+        const hls = new Hls({enablePlaybackRate: false});
         hls.loadSource(videoSrc);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
@@ -89,6 +91,20 @@
             video.play();
         });
     }
+
+    // Функция для переключения полноэкранного режима
+    document.getElementById('fullscreenBtn').addEventListener('click', function () {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.mozRequestFullScreen) { // Firefox
+            video.mozRequestFullScreen();
+        } else if (video.webkitRequestFullscreen) { // Chrome, Safari и Opera
+            video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) { // IE/Edge
+            video.msRequestFullscreen();
+        }
+    });
+
 </script>
 </body>
 </html>
