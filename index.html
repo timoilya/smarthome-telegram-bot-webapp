@@ -2,8 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="MobileOptimized" content="176"/>
@@ -13,10 +12,21 @@
     <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
 
     <style>
-        .videoCentered {
-            width: 720px;
-            margin-left: auto;
-            margin-right: auto;
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
         }
     </style>
 </head>
@@ -24,8 +34,7 @@
 <body>
 
 <center>
-    <video id="player" playsinline class="videoCentered"
-           style="width: 80%" autoplay controls crossorigin></video>
+    <video id="player" autoplay controls crossorigin></video>
 </center>
 
 
