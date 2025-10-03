@@ -89,6 +89,25 @@
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
             video.play();
         });
+        // Обработка ошибок
+        hls.on(Hls.Events.ERROR, function (event, data) {
+            switch (data.fatal) {
+                case Hls.ErrorTypes.NETWORK_ERROR:
+                    console.error('Ошибка сети: Не удалось загрузить поток.');
+                    break;
+                case Hls.ErrorTypes.MEDIA_ERROR:
+                    console.error('Ошибка медиа: Проблема с воспроизведением.');
+                    break;
+                case Hls.ErrorTypes.OTHER_ERROR:
+                    console.error('Произошла другая ошибка: ', data);
+                    break;
+                default:
+                    alert('ошибка');
+                    console.error('Неизвестная ошибка: ', data);
+                    break;
+            }
+        });
+
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = videoSrc;
         video.addEventListener('loadedmetadata', function () {
